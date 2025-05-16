@@ -4,6 +4,11 @@ title = 'vince9p'
 theme = 'm10c'
 cleanDestinationDir = true
 
+# Github pages: https://gohugo.io/host-and-deploy/host-on-github-pages/#step-5
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
 [pagination]
   pagerSize = 8
 
