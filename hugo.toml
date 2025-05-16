@@ -3,6 +3,7 @@ languageCode = 'fr-fr'
 title = 'vince9p'
 theme = 'm10c'
 cleanDestinationDir = true
+enableRobotsTXT = true
 
 # Github pages: https://gohugo.io/host-and-deploy/host-on-github-pages/#step-5
 [caches]
