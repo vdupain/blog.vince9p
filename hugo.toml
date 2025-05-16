@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'Vince9p'
+baseURL = 'https://vdupain.github.io/'
+languageCode = 'fr-fr'
+title = 'vince9p'
 theme = 'm10c'
 cleanDestinationDir = true
 
@@ -26,9 +26,8 @@ cleanDestinationDir = true
 
 [params]
   author = "Vincent Dupain"
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  description = "> /dev/null 2>&1"
   menu_item_separator = " - "
-  #avatar = me.jpg
   [[params.social]]
     icon = "brand-github"
     name = "Github"
