@@ -1,6 +1,6 @@
 +++
 title = "A propos de moi"
-date = "2025-05-01"
+date = "2025-01-01"
 +++
 
 
