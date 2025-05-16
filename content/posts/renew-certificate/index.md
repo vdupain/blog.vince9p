@@ -358,7 +358,7 @@ On voit d'ailleurs ici que le renouvellement a été réalisée la veille de l'�
 
 A noter que dans mon router/firewall OPNSense j'utilise **Unbound DNS** pour overrider des hosts/domaines et ainsi avoir du https en interne sur des services non exposés sur internet.
 
-![Configuration Unbound DNS](images/opnsense-ubound-dns.png)
+![Configuration Unbound DNS](images/opnsense-unbound-dns.png)
 
 #### Pas d'intégration native: utilisation du script ACME
 
