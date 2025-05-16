@@ -4,7 +4,7 @@ tags = ["homelab"]
 date = "2025-03-12"
 +++
 
-![renew-certificate](/posts/renew-certificate/renew-certificate.jpg)
+![renew-certificate](images/renew-certificate.jpg)
 
 ## Renouvellement automatique des certificats avec Let’s Encrypt et ACME
 
@@ -139,9 +139,9 @@ Sur l'interface OVH qui se trouve ici <https://api.ovh.com/createToken/index.cgi
 2. Définir une durée de validité
 3. Ajouter les droits sur **GET/PUT/POST/DELETE** sur **/domain/zone/**
 
-![Création des API Keys](/posts/renew-certificate/ovh-api-keys-1.png)
+![Création des API Keys](images/ovh-api-keys-1.png)
 
-![API Keys OVH crées](/posts/renew-certificate/ovh-api-keys-2.png)
+![API Keys OVH crées](images/ovh-api-keys-2.png)
 
 Une fois qu'on a notre Application Key, Application Secret et Consumer Key, on met tout ça dans un secret Kubernetes. Ici on utilisera un SealedSecret (secret scellé).
 C'est donc ce sealed secret qu'on utilise pour ovhAuthentificationRef de notre configuration du webhook OVH.
@@ -170,9 +170,9 @@ spec:
 Une fois qu'on déploie tous nos fichiers Kubernetes en gitops, on vérifie que tout est opérationnel sur notre cluster Kubernetes.
 Les pods cert-manager, cert-manager-ca-injector, cert-manager-webhook et cert-manager-webhook-ovh doivent être up and running.
 
-![Pods up & running](/posts/renew-certificate/k8s-pods-up-running.png)
+![Pods up & running](images/k8s-pods-up-running.png)
 
-![Logs du cert-manager-webhook-ovh](/posts/renew-certificate/k8s-logs-cert-manager-webhook-ovh.png)
+![Logs du cert-manager-webhook-ovh](images/k8s-logs-cert-manager-webhook-ovh.png)
 
 Il ne reste plus qu'à configurer nos Ingress Kubernetes. Je ne rentrerai pas dans le détail de la configuration de core-dns, external-dns, de l'Ingress Controller qui pourraient faire l'objet d'un article à part entière.
 
@@ -202,7 +202,7 @@ A noter que le nom le-prod est celui indiqué dans notre fichier HelmRelease cer
 
 Voila les Ingress qui sont déployés sur mon cluster:
 
-![Ingress](/posts/renew-certificate/k8s-ingress.png)
+![Ingress](images/k8s-ingress.png)
 
 
 Et maintenant on va aller voir du côté des certificats ce que ça donne.
@@ -211,17 +211,17 @@ Lors de l'installation du controller Cert-Manager, des CRD (Custom Resource Defi
 
 Ici on vérifie les demandes de certificats qui ont été émises par le controller Cert-Manager, certificats nécessaires pour notre Ingress pour le tls.
 
-![Certificaterequests](/posts/renew-certificate/k8s-certificaterequests.png)
+![Certificaterequests](images/k8s-certificaterequests.png)
 
 On voit que tout est ok et "approved". Maintenant on peut regarder voir si nos certificats émis par Let's Encrypt sont bien présents dans notre cluster.
 
-![Certificate](/posts/renew-certificate/k8s-certificate.png)
+![Certificate](images/k8s-certificate.png)
 
 Tous nos certificats ont bien été générés par Let's Encrypt et sont bien déployés dans notre cluster.
 
 ### Vérification de l'utilisation des certificats avec le HTTPS
 
-![Connection sécurisée en tls](/posts/renew-certificate/tls-connection-1.png)
+![Connection sécurisée en tls](images/tls-connection-1.png)
 
 Comme j'use et abuse de curl, bien entendu je préfére vérifier avec curl plutôt qu'avec mon navigateur.
 On peut voir que le certificat a bien été généré et émis par Let's Encrypt avec une validité de 3 mois.
@@ -286,33 +286,33 @@ Dans Proxmox l'intégration ACME est déjà prévue et il est possible de choisi
 
 Il faut tout d'abord configurer le compte Let's Encrypt ainsi que le plugin OVH pour le challenge dans la configuration générale de Proxmox (dans Datacenter).
 
-![Configuration ACME](/posts/renew-certificate/proxmox-acme-configuration.png)
+![Configuration ACME](images/proxmox-acme-configuration.png)
 
 On ajoute le compte Let's Encrypt et on ajoute le plugin.
 
-![Enregistrement du compte pour ACME](/posts/renew-certificate/proxmox-acme-register-account.png)
+![Enregistrement du compte pour ACME](images/proxmox-acme-register-account.png)
 
 On choisit donc le plugin OVH et pour **OVH_AK**, **OVH_AS** et **OVH_CK** on reprend les valeurs qu'on a généré tout à l'heure depuis l'interface d'OVH (cf. Application Key, Application Secret et Consumer Key).
 
-![Configuration du plugin OVH](/posts/renew-certificate/proxmox-acme-dns-plugin.png)
+![Configuration du plugin OVH](images/proxmox-acme-dns-plugin.png)
 
 Une fois cette configuration réalisée alors sur chaque noeud de notre cluster Proxmox, il suffira de configurer ACME et de déclencher la génération des certificats.
 
-![Configuration des certificats](/posts/renew-certificate/proxmox-certifs-config.png)
+![Configuration des certificats](images/proxmox-certifs-config.png)
 
 On édite d'abord le compte à utiliser qu'on a défini au dessus dans la configuration générale.
 
 Puis on ajoute un domaine en cliquant sur le bouton "**Add**".
 
-![Ajout d'un domaine](/posts/renew-certificate/proxmox-create-domain.png)
+![Ajout d'un domaine](images/proxmox-create-domain.png)
 
 Une fois fait, je n'ai plus qu'à cliquer sur le bouton "**Order Certificates Now**" pour demander à Let's Encrypt de me générer des certificats et de les installer sur le noeud proxmox.
 
-![Génération du certificat par Let's Encrypt](/posts/renew-certificate/proxmox-certificate-order-1.png)
+![Génération du certificat par Let's Encrypt](images/proxmox-certificate-order-1.png)
 
 Lors de la génération des certificats, on peut voir dans les logs qu'un record TXT est ajouté au nom DNS par Let's Encrypt.
 
-![Logs lors de la génération du certificat](/posts/renew-certificate/proxmox-certificate-order-2.png)
+![Logs lors de la génération du certificat](images/proxmox-certificate-order-2.png)
 
 Côté OVH et DNS, on peut voir ce record TXT (record de la forme _acme-challenge.YOUR_DOMAIN):
 
@@ -322,7 +322,7 @@ _acme-challenge.pve4     60 IN TXT
 
 Et hop un certificat valide pour mon noeud pve de mon cluster.
 
-![Connexion sécurisé en tls avec le certificat valide](/posts/renew-certificate/tls-connection-2.png)
+![Connexion sécurisé en tls avec le certificat valide](images/tls-connection-2.png)
 
 #### Intégration ACME native: exemple avec OPNSense
 
@@ -337,28 +337,28 @@ Dans OPNSense, il faut aller dans les sous-menus de "**Services / ACME Client**"
 
 Dans les settings, on active le renouvellement automatique pour ne pas s'embêter à le faire soit même.
 
-![Settings ACME dans OPNSense](/posts/renew-certificate/opnsense-acme-settings.png)
+![Settings ACME dans OPNSense](images/opnsense-acme-settings.png)
 
 On configure ensuite le compte à utiliser pour Let's Encrypt avec notre email.
 
-![Configuration du compte](/posts/renew-certificate/opnsense-acme-account.png)
+![Configuration du compte](images/opnsense-acme-account.png)
 
 Ensuite on configure le type de challenge à utiliser. Ici on est toujours sur OVH en challenge DNS-01.
 
 Comme pour la configuration de cert-manager et de Proxmox, on a besoin de l'application key, application secret et consumer key qu'on avait crée
 depuis l'interface OVH.
 
-![Configuration du type de challenge](/posts/renew-certificate/opnsense-acme-challenge-type.png)
+![Configuration du type de challenge](images/opnsense-acme-challenge-type.png)
 
 Une fois tout ça configuré, il suffit d'ajouter un certificat pour notre domaine.
 
 On voit d'ailleurs ici que le renouvellement a été réalisée la veille de l'écriture de cet article.
 
-![Ajout d'un domaine pour le certificat](/posts/renew-certificate/opnsense-acme-domain.png)
+![Ajout d'un domaine pour le certificat](images/opnsense-acme-domain.png)
 
 A noter que dans mon router/firewall OPNSense j'utilise **Unbound DNS** pour overrider des hosts/domaines et ainsi avoir du https en interne sur des services non exposés sur internet.
 
-![Configuration Unbound DNS](/posts/renew-certificate/opnsense-ubound-dns.png)
+![Configuration Unbound DNS](images/opnsense-ubound-dns.png)
 
 #### Pas d'intégration native: utilisation du script ACME
 
