@@ -1,4 +1,4 @@
-baseURL = 'https://vdupain.github.io/blog.vince9p'
+baseURL = 'https://blog.vincentdupain.com'
 languageCode = 'fr-fr'
 title = 'vince9p'
 theme = 'm10c'
