@@ -285,7 +285,7 @@ On pousse tout ça dans Git et FluxCD lira ce fichier manifest demo.yaml et fera
 
  Une fois cette ressource Terraform redéployée dans notre cluster (le cluster staging avec le controller Terraform, pas celui de démo qu'on vient juste de créer!), le controller Terraform va détecter le changement sur la ressource Terraform (demo.yaml) et va tenter de réconcilier cette ressource Terraform.
 
-**Attention: ici on parle de la réconciliation Terraform (pour amener l'infrastruction dans l'état désiré, c'est à dire ajouter un 2ème noeud à notre cluster de démo en instant une 2ème VM).**
+**Attention: ici on parle de la réconciliation Terraform (pour amener l'infrastruction dans l'état désiré, c'est à dire ajouter un 2ème noeud à notre cluster de démo en instanciant une 2ème VM).**
 
 Si on a du mal à appréhender les concepts, on peut vite se prendre les pieds dans le tapis entre les différents clusters, les différentes réconciliations (k8s et Terraform) et le côté Inception de cette démo.
 
