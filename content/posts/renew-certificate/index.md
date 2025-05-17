@@ -6,8 +6,6 @@ date = "2025-03-12"
 
 ![renew-certificate](images/renew-certificate.jpg)
 
-## Renouvellement automatique des certificats avec Let’s Encrypt et ACME
-
 Comment ne plus s'enquiquiner avec le renouvellement de nos certificats? Let's Encrypt bien sûr!
 Il faut reconnaître qu'on se noie bien souvent dans un verre d'eau avec la gestion de nos certificats et de leurs renouvellements!
 
