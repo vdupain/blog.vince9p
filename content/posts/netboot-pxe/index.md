@@ -408,9 +408,9 @@ Voici quelques captures d'écran de [Netboot.xyz](https://netboot.xyz/) lorsque 
 Et voilà on est capable de démarrer à peu prêt n'importe quelle machine depuis le réseau en PXE pour peu:
 - qu'elle dispose d'une interface et connexion au réseau
 - que son BIOS permette de démarrer en PXE
-- qu'on est sous la main un serveur DHCP et TFTP
+- qu'on ait sous la main un serveur DHCP et TFTP
 
-J'ai voulu également tester ça avec une carte BeagleBone Black dotée d'un ARM Cortex A8, malheursement son BIOS ne permet pas de démarrer en PXE.
+J'ai voulu également tester ça avec une carte BeagleBone Black dotée d'un ARM Cortex A8, malheureusement son BIOS ne permet pas de démarrer en PXE.
 
 A moi l'installation de Linux, OpenBSD, FreeBSD depuis le réseau sur mes machines physiques ou virtuelles!
 
