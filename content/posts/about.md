@@ -3,7 +3,6 @@ title = "A propos de moi"
 date = "2025-01-01"
 +++
 
-
 Vincent Dupain
 
 Ingénieur informatique diplômé de l’UTC
