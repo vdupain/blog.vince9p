@@ -12,9 +12,9 @@ J'ai cette carte ALIX depuis de nombreuses années, carte qui m'a servi pendant 
 
 Comme elle ne servait plus, je me suis dit que ce serait une bonne idée d'en faire quelque chose.
 
-J'ai donc décidé d'y installer OpenBSD car j'ai déjà utilisé ce système par le passé et il est consomme peu de ressource pour ce type de carte.
+J'ai donc décidé d'y installer OpenBSD car j'ai déjà utilisé ce système par le passé et il consomme peu de ressource pour ce type de carte.
 
-Et puis ça change que de toujours utilisé des systèmes Linux!
+Et puis ça change que de toujours utiliser des systèmes Linux!
 
 ## Configuration de TFTP et DHCP dans OPNsense
 
