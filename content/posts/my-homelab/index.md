@@ -111,7 +111,7 @@ Point d'accès et répéteur Wifi avec OpenWrt.
 
 - CPU: 500 MHz AMD Geode LX800
 - RAM: 256 MB DDR DRAM
-- Disque: CompactFlash socket, 44 pin IDE header
+- Disque: Compact Flash socket, 44 pin IDE header
 - OS: [OpenBSD](https://www.openbsd.org/)
 
 ![alix2d3](images/alix2d3.png)
