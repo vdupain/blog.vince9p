@@ -2,7 +2,6 @@
 title = "Installation d'OpenBSD 7.7 sur une carte PC Engines ALIX 2d3"
 tags = ["homelab", "openbsd", "opnsense", "network"]
 date = "2025-05-21"
-draft = true
 +++
 
 ![alix2d3](images/alix2d3.png)
