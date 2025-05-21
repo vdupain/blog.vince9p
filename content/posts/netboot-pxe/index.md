@@ -1,6 +1,6 @@
 +++
 title = "Comment démarrer un système d'exploitation depuis le réseau en PXE avec netboot.xyz"
-tags = ["homelab", "network"]
+tags = ["homelab", "opnsense", "network"]
 date = "2025-05-16"
 +++
 
