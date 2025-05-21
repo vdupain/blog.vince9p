@@ -669,7 +669,102 @@ Memory: Real: 6724K/158M act/tot Free: 77M Cache: 47M Swap: 14M/220M
 63275 _smtpd     2    0 1492K    4K idle      kqread    0:00  0.00% smtpd
 ```
 
-## Conclusion et la suite!
+## Actions post installation d'OpenBSD
+
+Comment expliquer ici: <https://www.openbsdhandbook.com/installation/#post-installation-actions>, il y a quelques actions à excécuter une fois l'installation terminée:
+
+On installe les différents patchs sur les fichiers binaires, cette action nécessite un redémarrage pour charger le nouveau noyau:
+
+```sh
+syspatch
+```
+
+Par exemple:
+
+```sh
+openbsd# syspatch
+Get/Verify syspatch77-001_nfs.tgz 100% |*************************************************************************************************************************************************************************************************|   139 KB    00:00
+Installing patch 001_nfs
+Get/Verify syspatch77-002_zic.tgz 100% |*************************************************************************************************************************************************************************************************| 24902       00:00
+Installing patch 002_zic
+Get/Verify syspatch77-003_zoneinf... 100% |**********************************************************************************************************************************************************************************************| 77240       00:00
+Installing patch 003_zoneinfo
+Relinking to create unique kernel... done; reboot to load the new kernel
+Errata can be reviewed under /var/syspatch
+```
+
+Ensuite on met à jour tous les packages (ainsi que les dépendances):
+
+```sh
+pkg_add -Uu
+```
+
+Enfin on met à jour les fichiers de configuration du système (avec l'option "-d" il y a juste le diff qui sera affiché, la fusion des différence devant être réalisée à la main):
+
+```sh
+sysmerge -d
+```
+
+Par exemple, ici on voit le diff détecté sur le fichier de configuration du démon ssh _*/etc/ssh/sshd_config*_:
+
+```sh
+openbsd# sysmerge -d
+
+========================================================================
+
+===> Displaying differences between ./etc/ssh/sshd_config and installed version:
+
+--- /etc/ssh/sshd_config        Wed May 21 19:04:00 2025
++++ ./etc/ssh/sshd_config       Sun Apr 13 18:27:07 2025
+@@ -27,7 +27,7 @@
+ # Authentication:
+
+ #LoginGraceTime 2m
+-PermitRootLogin no
++#PermitRootLogin prohibit-password
+ #StrictModes yes
+ #MaxAuthTries 6
+ #MaxSessions 10
+
+  Use 'd' to delete the temporary ./etc/ssh/sshd_config
+  Use 'i' to install the temporary ./etc/ssh/sshd_config
+  Use 'm' to merge the temporary and installed versions
+  Use 'v' to view the diff results again
+
+  Default is to leave the temporary file to deal with by hand
+
+How should I deal with this? [Leave it for later]
+
+========================================================================
+
+===> Displaying differences between ./etc/ttys and installed version:
+
+--- /etc/ttys   Wed May 21 19:04:00 2025
++++ ./etc/ttys  Sun Apr 13 18:27:06 2025
+@@ -16,7 +16,7 @@
+ ttyC9  "/usr/libexec/getty std.9600"   vt220   off secure
+ ttyCa  "/usr/libexec/getty std.9600"   vt220   off secure
+ ttyCb  "/usr/libexec/getty std.9600"   vt220   off secure
+-tty00  "/usr/libexec/getty std.115200" vt220    on secure
++tty00  "/usr/libexec/getty std.9600"   unknown off
+ tty01  "/usr/libexec/getty std.9600"   unknown off
+ tty02  "/usr/libexec/getty std.9600"   unknown off
+ tty03  "/usr/libexec/getty std.9600"   unknown off
+
+  Use 'd' to delete the temporary ./etc/ttys
+  Use 'i' to install the temporary ./etc/ttys
+  Use 'm' to merge the temporary and installed versions
+  Use 'v' to view the diff results again
+
+  Default is to leave the temporary file to deal with by hand
+
+How should I deal with this? [Leave it for later]
+---- /etc/ssh/sshd_config unhandled, re-run sysmerge to merge the new version
+---- /etc/ttys unhandled, re-run sysmerge to merge the new version
+openbsd#
+```
+
+## Conclusion et la suite
 
 Installer OpenBSD sur du matériel ancien n'est pas bien difficile.
 
@@ -684,6 +779,7 @@ Je lui trouverais bien une utilisation plutôt qu'elle reste au fond du tiroir. 
 
 - [Comment démarrer un système d'exploitation depuis le réseau en PXE avec netboot.xyz](/posts/netboot-pxe)
 - [OpenBSD](https://www.openbsd.org/index.html)
+- [OpenBSD Handbook](https://www.openbsdhandbook.com/>)
 - [OpenBSD pxeboot manual page](https://man.openbsd.org/pxeboot.8)
 - [OpenBSD FAQ - Installation Guide](https://www.openbsd.org/faq/faq4.html)
 - [Carte PC Engines ALIX 2d3](https://www.pcengines.ch/alix2d3.htm)
