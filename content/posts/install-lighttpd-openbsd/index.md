@@ -56,7 +56,7 @@ openbsd# cat /var/www/logs/error.log
 
 En fait, c'est "une erreur normale" car le processus **lighttpd** est chrooté: c'est à dire que le répertoire racine du processus est modifé pour remplacer la racine par défaut **_/_** (root) par un autre répertoire (**_/var/www_** dans le cas présent).
 
-D'où le nom de la commande **chroot** (change roo ou changer la racine en français).
+D'où le nom de la commande **chroot** (change root ou changer la racine en français).
 
 Mais il n'existe pas de fichier **_/dev/null_** dans le répertoire _**/var/www/**_, ce qui cause l'erreur au démarrage du démon lighttpd.
 
@@ -160,7 +160,7 @@ Hello !
 * Connection #0 to host localhost left intact
 ```
 
-Tout est ok et lighttpd fonctionne correctement pour service des pages html statiques.
+Tout est ok et lighttpd fonctionne correctement pour servir des pages html statiques.
 
 > Ne pas oublier d'installer curl (pkg_add curl) qui n'est pas présent par défaut dans OpenBSD
 
