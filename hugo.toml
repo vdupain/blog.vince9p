@@ -32,7 +32,7 @@ enableRobotsTXT = true
 
 [params]
   author = "Vincent Dupain"
-  description = "It's a UNIX system! I know this!"
+  description = "\u0022It's a UNIX system! I know this!\u0022"
   menu_item_separator = " - "
   [[params.social]]
     icon = "brand-github"
