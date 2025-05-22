@@ -1,7 +1,7 @@
 +++
 title = "Installation de Lighttpd sur OpenBSD 7.7"
 tags = ["homelab", "openbsd"]
-date = "2025-05-21"
+date = "2025-05-22"
 +++
 
 ## Installation

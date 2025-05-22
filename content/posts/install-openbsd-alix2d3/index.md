@@ -75,7 +75,7 @@ boot bsd.rd
 root@OPNsense:/usr/local/tftp #
 ```
 
-C'est terminé pour la configuration tftp, on passe à celle du serveiur DHCP.
+C'est terminé pour la configuration TFTP, on passe à celle du serveur DHCP.
 
 ### Configuration DHCP
 
