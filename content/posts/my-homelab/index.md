@@ -45,7 +45,7 @@ Point d'accès et répéteur Wifi avec OpenWrt.
 
 ![apu2c4_2](images/apu2c4_2.png)
 
-## Switch managé MikroTik CSS610-8G-2S+
+## Commutateur réseau administrable MikroTik CSS610-8G-2S+
 
 - 8 ports Ethernet 10/100/1000
 - 2 ports SFP+
