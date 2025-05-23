@@ -1,0 +1,73 @@
+baseURL = 'https://blog.vincentdupain.com'
+languageCode = 'fr-fr'
+title = 'vince9p'
+theme = 'm10c'
+cleanDestinationDir = true
+enableRobotsTXT = true
+
+# Github pages: https://gohugo.io/host-and-deploy/host-on-github-pages/#step-5
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
+
+[pagination]
+  pagerSize = 8
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 2
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/posts/about/"
+    weight = 3
+
+[params]
+  author = "Vincent Dupain"
+  description = "\u0022It's a UNIX system! I know this!\u0022"
+  menu_item_separator = " - "
+  [[params.social]]
+    icon = "brand-github"
+    name = "Github"
+    url = "https://github.com/vdupain/"
+  [[params.social]]
+    icon = "brand-x"
+    name = "X"
+    url = "https://twitter.com/vdupain"
+  [[params.social]]
+    icon = "brand-linkedin"
+    name = "Linkedin"
+    url = "https://www.linkedin.com/in/vdupain/"
+
+  # Default theme
+  # [params.style]
+  #   darkestColor = "#242930"
+  #   darkColor = "#353b43"
+  #   lightColor = "#afbac4"
+  #   lightestColor = "#ffffff"
+  #   primaryColor = "#57cc8a"
+
+  # Green theme
+  [params.style]
+    darkestColor = "#315659"
+    darkColor = "#253031"
+    lightColor = "#96a879"
+    lightestColor = "#fff"
+    primaryColor = "#dad865"
+
+  # Red theme
+  # [params.style]
+  #   darkestColor = "#d35050"
+  #   darkColor = "#212121"
+  #   lightColor = "#d6d6d6"
+  #   lightestColor = "#d3d3d3"
+  #   primaryColor = "#ffffff"
+
