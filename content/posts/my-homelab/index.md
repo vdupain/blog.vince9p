@@ -1,6 +1,6 @@
 +++
 title = "Mon homelab"
-tags = ["homelab"]
+tags = ["homelab", "self-hosting"]
 date = "2025-05-17"
 +++
 
@@ -15,7 +15,6 @@ date = "2025-05-17"
 - OS: [OPNsense](https://opnsense.org/)
 
 ![box-internet-router-2](images/box-internet-router-2.png)
-
 
 ## AP et Répéteur Wifi PC Engines APU2
 

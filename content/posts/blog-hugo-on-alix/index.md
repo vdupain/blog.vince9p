@@ -223,6 +223,7 @@ $ su -
 ```
 
 On édite le crontab et ajoute cette ligne de configuration:
+
 ```sh
 */10 * * * * /root/scripts-alix/generate-status.sh
 ```
@@ -253,14 +254,14 @@ Et donc mon blog est disponible sur 2 adresses:
 
 - <https://homelab.vincentdupain.com/>
   - hébergé (auto hébergement) sur le serveur web ligthttpd sous OpenBSD
-  - contruit et déployé par le script qu'on a vu dans cet article (*_deploy-alix.sh_*)
+  - contruit et déployé par le script qu'on a vu dans cet article (_deploy-alix.sh_)
   - page de statut ici: <https://homelab.vincentdupain.com/status/>
 - <https://blog.vincentdupain.com/>:
   - hébergé sur [GitHub](https://github.com/vdupain/blog.vince9p)
   - construit et déployé avec [GitHub Actions](https://github.com/vdupain/blog.vince9p/blob/main/.github/workflows/hugo.yaml)
   - pas de page de statut
 
-## Pour aller plus loin
+## Références
 
 - [Hugo open-source static site generators](https://gohugo.io/)
 - [Deploy Hugo with rsync](https://gohugo.io/host-and-deploy/deploy-with-rsync/)

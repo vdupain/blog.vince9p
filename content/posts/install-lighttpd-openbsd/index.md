@@ -164,7 +164,7 @@ Tout est ok et lighttpd fonctionne correctement pour servir des pages html stati
 
 > Ne pas oublier d'installer curl (pkg_add curl) qui n'est pas présent par défaut dans OpenBSD
 
-## Pour aller plus loin
+## Références
 
 - [OpenBSD](https://www.openbsd.org/index.html)
 - [lighttpd](https://www.lighttpd.net/)
