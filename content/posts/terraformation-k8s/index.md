@@ -1,6 +1,6 @@
 +++
 title = "Terraformation de clusters Kubernetes Talos sur Proxmox en GitOps"
-tags = ["homelab", "k8s"]
+tags = ["homelab", "k8s", "terraform"]
 date = "2025-03-02"
 +++
 
@@ -329,7 +329,7 @@ C'est finalement très puissant une fois qu'on a compris le concept et son impl�
 
 On cherche tout simplement à aller d'un état initial vers un état final. Avec état final = état initial + changeset avec changeset = ajout/suppression/modification de ressources qui composent un état (objets K8s, ressources Terraform, etc).
 
-## Pour aller plus loin
+## Références
 
 - Terraform Controller: <https://flux-iac.github.io/tofu-controller/>
 - Provider Terraform bpg Proxmox: <https://registry.terraform.io/providers/bpg/proxmox/latest>

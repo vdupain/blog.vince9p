@@ -1,6 +1,6 @@
 +++
 title = "Renouvellement automatique des certificats avec Let’s Encrypt et ACME"
-tags = ["homelab"]
+tags = ["homelab", "k8s", "proxmox", "opnsense"]
 date = "2025-03-12"
 +++
 
@@ -184,7 +184,7 @@ Et bien entendu on ajoute aussi une entrée tls pour cet Ingress avec le nom du 
 
 A noter que le nom le-prod est celui indiqué dans notre fichier HelmRelease cert-manager-webhook-ovh.yaml où on a déclaré l'émetteur.
 
-```
+```yaml
  ingress:
         enabled: true
         annotations:
@@ -201,7 +201,6 @@ A noter que le nom le-prod est celui indiqué dans notre fichier HelmRelease cer
 Voila les Ingress qui sont déployés sur mon cluster:
 
 ![Ingress](images/k8s-ingress.png)
-
 
 Et maintenant on va aller voir du côté des certificats ce que ça donne.
 
@@ -322,7 +321,7 @@ Et hop un certificat valide pour mon noeud pve de mon cluster.
 
 ![Connexion sécurisé en tls avec le certificat valide](images/tls-connection-2.png)
 
-#### Intégration ACME native: exemple avec OPNSense
+#### Intégration ACME native: exemple avec OPNsense
 
 Je ne vais pas trop rentré dans le détail car le principe est toujours le même:
 
@@ -331,11 +330,11 @@ Je ne vais pas trop rentré dans le détail car le principe est toujours le mêm
 3. ajout/création du domaine pour le certificat à générer
 4. enfin génération et installation du certificat généré par Let's Encrypt
 
-Dans OPNSense, il faut aller dans les sous-menus de "**Services / ACME Client**".
+Dans OPNsense, il faut aller dans les sous-menus de "**Services / ACME Client**".
 
 Dans les settings, on active le renouvellement automatique pour ne pas s'embêter à le faire soit même.
 
-![Settings ACME dans OPNSense](images/opnsense-acme-settings.png)
+![Settings ACME dans OPNsense](images/opnsense-acme-settings.png)
 
 On configure ensuite le compte à utiliser pour Let's Encrypt avec notre email.
 
@@ -354,7 +353,7 @@ On voit d'ailleurs ici que le renouvellement a été réalisée la veille de l'�
 
 ![Ajout d'un domaine pour le certificat](images/opnsense-acme-domain.png)
 
-A noter que dans mon router/firewall OPNSense j'utilise **Unbound DNS** pour overrider des hosts/domaines et ainsi avoir du https en interne sur des services non exposés sur internet.
+A noter que dans mon router/firewall OPNsense j'utilise **Unbound DNS** pour overrider des hosts/domaines et ainsi avoir du https en interne sur des services non exposés sur internet.
 
 ![Configuration Unbound DNS](images/opnsense-unbound-dns.png)
 
@@ -419,7 +418,7 @@ Dernier point, on a vu rapidement ACME pour le renouvellement
 automatique, ce dernier n'est pas propre à Let's Encrypt, en effet il peut
 être utilisé avec d'autres fournisseurs de certificats TLS (ZeroSSL, etc...).
 
-## Pour aller plus loin
+## Références
 
 - les types de challenges: <https://letsencrypt.org/fr/docs/challenge-types/>
 - cert-manager: <https://artifacthub.io/packages/helm/cert-manager/cert-manager>

@@ -1,6 +1,6 @@
 +++
 title = "Comment démarrer un système d'exploitation depuis le réseau en PXE avec netboot.xyz"
-tags = ["homelab", "opnsense", "network"]
+tags = ["homelab", "opnsense", "network", "proxmox"]
 date = "2025-05-16"
 +++
 
@@ -73,7 +73,8 @@ total 6748
 
 J'ai téléchargé le fichier netboot.xyz-arm64.efi pour les architectures ARM mais je ne l'utiliserai pas.
 
-Il nous reste à démarrer le serveur TFTP.
+Il nous reste à démarrer le serveur TFTP:
+
 - on active le service TFTP en cliquant sur "**Enable**"
 - on indique l'IP depuis laquelle le daemon TFTP écoutera
 - on clique sur le bouton "**Save**"
@@ -133,7 +134,6 @@ Enfin on peut redémarrer le serveur DHCP pour prendre en compte les modificatio
 ![opnsense-dhcp-restart](images/opnsense-dhcp-restart.png)
 
 Et voilà on a terminé avec OPNsense.
-
 
 ## Démarrer en PXE avec une carte Alix 2D3
 
@@ -236,6 +236,7 @@ netboot.xyz v2.x - next-server: 192.168.10.1
 ```
 
 On voit quelques informations intéressantes pendant la séquence de démarrage:
+
 - connexion réseau avec le serveur DHCP
 - tentatives de téléchargement des fichiers d'amorçage
 - netboot.xyz v2.x - next-server: 192.168.10.1
@@ -250,7 +251,6 @@ Je ne rentre pas dans le détail de la création de la VM car ce n'est pas l'obj
 
 Il faut juste s'assurer dans la configuration que le démarrage de la VM se fait bien sur l'interface réseau en 1er et non pas sur le disque ni le CD-ROM.
 
-
 ### Configuration de la VM
 
 Pour cela, c'est très simple:
@@ -263,7 +263,6 @@ Pour cela, c'est très simple:
 Il suffit de modifier l'ordre et de choisir "**net0**" à mettre en haut de la liste pour démarrer sur le périphérique réseau.
 
 Le nom de l'interface réseau peut éventuellement changer suivant la configuration de la VM.
-
 
 ![proxmox-vm-boot-order](images/proxmox-vm-boot-order.png)
 
@@ -287,7 +286,6 @@ Pour cela il suffit de sélectionner "**xterm.js**" depuis le menu "**Console**"
 ![proxmox-vm-term-1](images/proxmox-vm-term-1.png)
 
 ![proxmox-vm-term-2](images/proxmox-vm-term-2.png)
-
 
 Ci dessous on retrouve la séquence complète de démarrage de la VM.
 
@@ -369,7 +367,6 @@ https://boot.netboot.xyz/menu.ipxe....
       netboot.xyz [ enabled: true ] 
 ```
 
-
 Comme sur la carte Alix, on peut voir en détail la séquence de démarrage.
 
 On récupère une adresse IP depuis le serveur DHCP et ensuite il nous donne l'IP pour se connecter au serveur TFTP.
@@ -406,6 +403,7 @@ Voici quelques captures d'écran de [Netboot.xyz](https://netboot.xyz/) lorsque 
 ## Conclusion
 
 Et voilà on est capable de démarrer à peu prêt n'importe quelle machine depuis le réseau en PXE pour peu:
+
 - qu'elle dispose d'une interface et connexion au réseau
 - que son BIOS permette de démarrer en PXE
 - qu'on ait sous la main un serveur DHCP et TFTP
@@ -414,7 +412,7 @@ J'ai voulu également tester ça avec une carte BeagleBone Black dotée d'un ARM
 
 A moi l'installation de Linux, OpenBSD, FreeBSD depuis le réseau sur mes machines physiques ou virtuelles!
 
-## Pour aller plus loin
+## Références
 
-* <https://netboot.xyz/>
-* <https://opnsense.org/>
+- <https://netboot.xyz/>
+- <https://opnsense.org/>

@@ -774,7 +774,7 @@ Je lui trouverais bien une utilisation plutôt qu'elle reste au fond du tiroir. 
 
 >About 3 to 4W at Linux idle, peak about 6W without miniPCI cards and USB devices
 
-## Pour aller plus loin
+## Références
 
 - [Comment démarrer un système d'exploitation depuis le réseau en PXE avec netboot.xyz](/posts/netboot-pxe)
 - [OpenBSD](https://www.openbsd.org/index.html)
