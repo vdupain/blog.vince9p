@@ -1,7 +1,7 @@
 +++
-title = "Bye bye Oh My Zsh, retour à bash et powerline.bash "
+title = "Bye bye Oh My Zsh, retour à bash et powerline.bash"
 tags = ["shell"]
-date = "2025-05-28"
+date = "2025-05-27"
 +++
 
 ## Pourquoi supprimer Oh My Zsh?
