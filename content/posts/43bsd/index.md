@@ -18,14 +18,14 @@ Et donc je me suis lancé dans l'aventure: quoi de mieux pour cela que d'install
 
 ## Installation et configuration
 
-Je ne vais pas rentrer dans le détail de l'installation car j'ai suivi à lettre ce guide: <https://gunkies.org/wiki/Installing_4.3_BSD_on_SIMH> et cela a parfaitement fonctionné  du 1er coup.
+Je ne vais pas rentrer dans le détail de l'installation car j'ai suivi à la lettre ce guide: <https://gunkies.org/wiki/Installing_4.3_BSD_on_SIMH> et cela a parfaitement fonctionné  du 1er coup.
 
 En prérequis, j'ai juste installé [Open SimH](https://opensimh.org/) (sur une VM NetBSD) ainsi que l'interpréteur Perl:
 
 - [Open SimH - Bringing Antiquities back to life](https://opensimh.org/) est un simulateur pour les vieux ordinateurs des années 60/70/80 (VAX, PDP11, IBM 1401, Altair, etc...)
 - Perl: on en a besoin pour lancer un [script perl](https://gunkies.org/wiki/Mkdisttap.pl) qui créera des images de bande de disques nécessaires à SIMH
 
-Pour installer ces packages, on peut utiliser au choix **pkg_add** ou bien **pkgin** (ce dernier me concernant, il installera également les dépendances).
+Pour installer ces packages, on peut utiliser au choix **pkg_add** ou bien **pkgin** (il installera également les dépendances).
 
 Les packages que j'ai installé sont les suivants:
 
@@ -133,7 +133,42 @@ myname# date
 Wed May 28 08:20:04 PDT 1986
 ```
 
-Tiens c'est marrant, on a le **owner** mais pas le **group** sur la sortie standard de la commande **ls**.
+Voyons voir les processus qui tourent au démarrage de **4.3BSD**:
+
+```sh
+myname# ps ax
+  PID TT STAT  TIME COMMAND
+    0 ?  D     0:00 swapper
+    1 ?  I     0:00 init
+    2 ?  D     0:00 pagedaemon
+   46 co S     0:00 /etc/syslogd
+   58 ?  I     0:00 /usr/lib/sendmail -bd -q30m
+   61 ?  S     0:00 -running queue (sendmail)
+   68 ?  S     0:00 /etc/update
+   71 ?  I     0:00 /etc/cron
+   79 ?  I     0:00 /etc/rwhod
+   83 ?  I     0:00 /etc/inetd
+   88 ?  I     0:00 /usr/lib/lpd
+   93 co S     0:00 -csh (csh)
+   94 ?  S     0:00 - std.9600 tty00 (getty)
+   95 ?  S     0:00 - std.9600 tty01 (getty)
+   96 ?  S     0:00 - std.9600 tty02 (getty)
+   97 ?  S     0:00 - std.9600 tty03 (getty)
+   98 ?  S     0:00 - std.9600 tty04 (getty)
+   99 ?  S     0:00 - std.9600 tty05 (getty)
+  100 ?  S     0:00 - std.9600 tty06 (getty)
+  101 ?  S     0:00 - std.9600 tty07 (getty)
+  109 co R     0:00 ps ax
+```
+
+Et oui on retrouve entre autre:
+
+- le processus **init** (pid 1) forcément!
+- ainsi que **inetd** qui gère les connexions et services réseaux (remplacé depuis par ~~la grosse bouse~~ systemd)
+- cron
+- les services d'envoi de mail et d'impression
+
+Tiens c'est marrant, on a le **owner** mais pas le **group** sur la sortie standard de la commande **ls**:
 
 ```sh
 myname# ls -l /
@@ -163,7 +198,7 @@ drwxr-xr-x 23 root          512 May 28 03:32 usr/
 
 Sinon on reconnaît une arborescence Unix à-peu-près standard: /bin, /usr, /lib, /mnt, etc...
 
-La commande uname n'existait pas encore à cette époque:
+La commande **uname** n'existait pas encore à cette époque:
 
 ```sh
 myname# uname
@@ -404,7 +439,9 @@ lrwxr-xr-x  1 root           11 May 28 03:33 tags@ -> ../sys/tags
 -r--r--r--  1 root          912 Jun  5  1986 udp_var.h
 ```
 
-Tu es plutôt TCP ou UDP?
+Tu es plutôt TCP ou UDP? socket local ou remote?
+
+Je ne suis pas développeur C mais je trouve que ça se lit plutôt facilement et qu'on comprend l'idée et les concepts généraux.
 
 ```sh
 myname# more /usr/sys/h/socket.h
@@ -450,7 +487,7 @@ struct sockaddr {
 };
 ```
 
-Pour rigoler, voyons le contenu du fichier _/etc/hosts_:
+Voyons le contenu du fichier _/etc/hosts_:
 
 ```sh
 myname# cat /etc/hosts
@@ -468,6 +505,41 @@ myname# cat /etc/hosts
 # Imaginary network.
 0.2             myname.my.domain myname
 0.3             myfriend.my.domain myfriend
+```
+
+D'ailleurs dans le répertoire _/etc_ on y trouve aussi des fichiers exécutables, on y trouve par exemple:
+
+- **ftpd** et **tftpd**
+- **telnetd**: on utilise depuis un bout de temps ssh pour les connexions distantes mais il y a longtemps on utilisait telnet (même pour tester la connexion à un service distant)
+
+```sh
+myname# ls /etc
+MAKEDEV        flcopy*        hosts.equiv    passwd         rshd*
+XNSrouted*     fsck*          htable*        passwd.dir     rwhod*
+ac*            fstab          icheck*        passwd.pag     rxformat*
+accton*        fstab.hp       ifconfig*      ping*          sa*
+arff*          fstab.hp400m   implog*        printcap       savecore*
+arp*           fstab.ra60     implogd*       protocols      services
+bad144*        fstab.ra80     inetd*         psdatabase     shells
+badsect*       fstab.ra81     inetd.conf     pstat*         shutdown*
+catman*        fstab.rb80     init*          quot*          swapon*
+chown*         fstab.rk07     kgmon*         quotacheck*    syslog.conf
+clri*          fstab.rm03     lpc*           quotaoff*      syslog.pid
+comsat*        fstab.rm05     map3270        quotaon*       syslogd*
+config*        fstab.rm80     mkfs*          rc             talkd*
+cron*          fstab.rp06     mklost+found*  rc.local       telnetd*
+dcheck*        fstab.rp07     mknod*         rdump*         termcap
+diskpart*      fstab.up       mkpasswd*      reboot*        tftpd*
+disktab        fstab.up160m   mkproto*       remote         timed*
+dmesg*         fstab.up300m   motd           renice*        timedc*
+dump*          ftpd*          mount*         repquota*      trpt*
+dump.4.1*      ftpusers       mtab           restore*       ttys
+dumpdates      gettable*      named*         rexecd*        tunefs*
+dumpfs*        getty*         ncheck*        rlogind*       umount*
+edquota*       gettytab       networks       rmt*           update*
+fastboot*      group          newfs*         route*         utmp
+fasthalt*      halt*          ntalkd*        routed*        uucpd*
+fingerd*       hosts          pac*           rrestore*      vipw*
 ```
 
 Aller j'arrête là car je pourrais y passer des heures et jours entier!
@@ -520,8 +592,8 @@ May 28 08:45:31 myname shutdown: halt by root:
 May 28 08:45:34 myname syslogd: going down on signal 15
 syncing disks... done
 halting (in tight loop); hit
-	^P
-	HALT
+        ^P
+        HALT
 
 
 Infinite loop, PC: 8002AFCD (BRB 8002AFCD)
@@ -535,9 +607,9 @@ Rappelons tout même que le VAX 11/780 ressemblait à ceci:
 
 ![vax11-780_2](images/vax11-780_2.png)
 
-Je me suis vraiment amusé et j'ai pris beaucoup de plaisir à installer et jouer un peu avec 4.3BSD!
+Je me suis vraiment amusé et j'ai pris beaucoup de plaisir à installer et jouer un peu avec **4.3BSD**!
 
-J'espère que vous ferez autant! Je retenterai l'expérience sur d'autres systèmes et d'autres vestiges du passé, je pense notamment au serveur web httpd du CERN !
+J'espère que vous ferez autant! Je retenterai l'expérience sur d'autres systèmes et d'autres vestiges du passé, je pense notamment au **serveur web httpd du CERN** !
 
 ## Références
 
