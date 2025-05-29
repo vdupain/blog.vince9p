@@ -46,6 +46,10 @@ enableRobotsTXT = true
     icon = "brand-linkedin"
     name = "Linkedin"
     url = "https://www.linkedin.com/in/vdupain/"
+  [[params.social]]
+    icon = "brand-rss"
+    name = "Rss"
+    url = "/index.xml"
 
   # Default theme
   # [params.style]
