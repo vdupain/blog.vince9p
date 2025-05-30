@@ -334,12 +334,12 @@ Je n'ai pas tout expliqué en détail, ni non plus des inconvénients de cette s
 
 - je n'ai pas expliqué la variable DISPLAY: on affiche sur une machine mais aussi sur un écran. Variable à connaître quand on utilise X11
 - on aurait pu faire pareil sans X11 forwarding (avec ```xhost +``` et ```export DISPLAY=...```)
+- XFree86 versus XOrg versus Wayland
 - inconvénients:
   - performance: c'est lent. Il faudrait sans doute compresser et changer le cypher utilisé par ssh avec X11 forwarding
   - problème de sécurité et vulnérabilité
   - très sensible à la latence
   - ...
-- XFree86 versus XOrg vesus Wayland
 
 ## Références
 
