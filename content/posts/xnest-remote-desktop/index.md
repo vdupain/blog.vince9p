@@ -4,7 +4,7 @@ tags = ["unix", "bsd"]
 date = "2025-05-30"
 +++
 
-Comme je suis nostalgique des vieux Unix, BSD, Linux, des différents gestionnaires de fenêtres et environnements de bureau vintages (twm, ctwm, CDE, Window Maker, Afterstep, XFce, twm, i3, ~~Gnone~~, ~~KDE~~...), j'avais envie de me réinstaller un environnement de bureau et configurer de l'accès à un bureau à distance, comme à la bonne époque!
+Comme je suis nostalgique des vieux Unix, BSD, Linux, des différents gestionnaires de fenêtres et environnements de bureau vintages (twm, ctwm, CDE, Window Maker, Afterstep, XFce, twm, i3, ~~Gnome~~, ~~KDE~~...), j'avais envie de me réinstaller un environnement de bureau et configurer de l'accès à un bureau à distance, comme à la bonne époque!
 
 Pour cela je vais utiliser le bon vieux système de fenêtrage **[X Window System](https://fr.wikipedia.org/wiki/X_Window_System)** (plutôt que VNC ou bien RDP) ainsi qu'un **gestionnaire de fenêtres** ou **environnement de bureau**.
 
