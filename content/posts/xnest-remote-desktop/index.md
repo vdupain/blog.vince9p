@@ -177,8 +177,12 @@ Un schéma sera plus simple pour comprendre de quoi on parle:
 C'est parti, on voit comment on fait ça!
 
 ```sh
-Xnest -geometry 800x600 :1 &
+Xnest -geometry 800x600 -depth 24 :1 &
 ```
+
+- **-geometry** define geometry of the Xnest window
+- **-depth** définit la profondeur des couleurs (8, 16, 24) (utiliser la même que celui du client X)
+- **:1** l'affichage du serveur Xnest
 
 Ici on lance un serveur X Xnest en précisant la taille souhaitée (800x600) et l'affichage (:1).
 
@@ -187,6 +191,8 @@ Ensuite on lance une application (client X) qui esont donc affichée sur ce serv
 ```sh
 xclock -display :1 &
 ```
+
+- **-display :1** pour indiquer l'affichage qu'on utilise (celui du serveur Xnest)
 
 ![xnest-xclock](images/xnest-xclock.png)
 
@@ -199,17 +205,44 @@ Dans cette fenêtre Xnest, on peut voir notre client X xclock qui s'affiche.
 
 Avant de lancer un gestionnaire de fenêtre, on va s'amuser un peu en lançant plusieurs serveurs X et clients X, après tout rien ne nous en empêche !
 
+On lance 2 autres serveurs Xnest:
+
 ```sh
-Xnest -ac -geometry 800x600 :2 &
-Xnest -ac -geometry 800x600 :3 &
+Xnest -geometry 800x600 -depth 24 :2 &
+Xnest -display localhost:10.0 -geometry 800x600 -depth 24 :3 &
+```
+
+- **-display localhost:10.0** : c'est implicite quand on se connecte avec ```ssh -X``` car ce cas la variable DISPLAY est définit (DISPLAY=localhost:10.0)
+
+Mais pourquoi donc la variable DISPLAY est défini avec localhost alors qu'on déporte l'affichage sur une autre machine?
+
+La réponse est du côté de ssh X11 port forwarding et du tunnel ssh, voir la man page du fichier de configuration (_sshd_config_) du démon ssh
+
+```sh
+     X11UseLocalhost
+             Specifies whether sshd(8) should bind the X11 forwarding server
+             to the loopback address or to the wildcard address.  By default,
+             sshd binds the forwarding server to the loopback address and sets
+             the hostname part of the DISPLAY environment variable to
+             localhost.  This prevents remote hosts from connecting to the
+             proxy display.  However, some older X11 clients may not function
+             with this configuration.  X11UseLocalhost may be set to no to
+             specify that the forwarding server should be bound to the
+             wildcard address.  The argument must be yes or no.  The default
+             is yes.
+```
+
+On lance ensuite quelques applications (clients X) sur nos serveurs X:
+
+```sh
 xclock -digital -display :2 &
 xeyes -display :3 &
 xterm -display :3 -geometry -0+0 &
 ```
 
-![3-xserver](images/3-xserver.png)
-
 On voit donc bien apparaître nos 3 fenêtres Xnest et les applications xclock, xeyes et xterm exéctuées et affichées sur ces 3 serveurs Xnest.
+
+![3-xserver](images/3-xserver.png)
 
 Ces 3 serveur X Xnest étant aussi des clients X, ils sont donc affichés par le serveur X XQuartz sur le poste de travail.
 
@@ -230,7 +263,7 @@ Pour commencer on va installer un environnement de bureau **xfce4** puis on essa
 
 Sur notre serveur distant, on va installer le package **xfce4**, ici le serveur distant est la VM NetBSD, l'installation du package et la configuration sont donc propre à NetBSD.
 
-Installation du package:
+Installation du package xfce4:
 
 ```sh
 # pkgin install xfce4
@@ -252,7 +285,7 @@ On a juste 2 commandes à lancer:
 - et le gestionnaire de bureau xfce4
 
 ```sh
-Xnest -ac -geometry 1980x1200 :1 &
+Xnest -ac -geometry 1980x1200 -depth 24 :1 &
 dbus-launch xfce4-session --display :1 &
 ```
 
@@ -264,7 +297,7 @@ On a notre environnement de bureau **xfce4** de la VM NetBSD lancé sur notre po
 
 Maintenant on va faire pareil avec l'environnement de bureau CDE pour le côté vintage!
 
-Idem on recherche et installe le package:
+Idem on recherche et installe le package **cde**:
 
 ```sh
 # pkgin search cde
@@ -316,15 +349,36 @@ ttdbserver 100083 ttooltalk
 Voila nous n'avons plus qu'à lancer l'environnement de bureau **CDE**:
 
 ```sh
-Xnest -ac -geometry 1980x1200 :1 &
+Xnest -geometry 1980x1200 -depth 24 :1 &
 export DISPLAY=:1 && /usr/pkg/dt/bin/Xsession
 ```
 
-Me voici de retour dans les années 90 quand j'étais étudiant en DUT et ensuite école d'ingénieur.
+Me voici de retour dans les années 90 quand j'étais étudiant en DUT puis en école d'ingénieur.
 
 On travaillait sur des stations Sun SPARCStation sous Solaris et on se connectait depuis des terminaux X.
 
 ![desktop-environment-cde](images/desktop-environment-cde.png)
+
+## Lancement par script
+
+Créer un script pour exécuter le nécessaire, ici le script s'appelle _xsess.sh_, avec le contenu suivant:
+
+```sh
+#!/bin/sh
+
+display=:1
+
+/usr/X11R7/bin/Xnest -once -depth 24 $display &
+
+export DISPLAY=$display
+/usr/pkg/dt/bin/Xsession &
+```
+
+Puis on exécute le script depuis le Mac mini macOS pour lancer le bureau distant:
+
+```sh
+ssh -X vince@neptune /home/vince/xsess.sh
+```
 
 ## Conclusion
 
@@ -333,7 +387,7 @@ Vous allez me dire, on sait faire la même chose avec VNC, RDP: oui mais bon c'e
 Je n'ai pas tout expliqué en détail, ni non plus des inconvénients de cette solution:
 
 - je n'ai pas expliqué la variable DISPLAY: on affiche sur une machine mais aussi sur un écran. Variable à connaître quand on utilise X11
-- on aurait pu faire pareil sans X11 forwarding (avec ```xhost +``` et ```export DISPLAY=...```)
+- on aurait pu faire pareil mais sans X11 forwarding (avec ```xhost +``` et ```export DISPLAY=...```)
 - XFree86 versus XOrg versus Wayland
 - inconvénients:
   - performance: c'est lent. Il faudrait sans doute compresser et changer le cypher utilisé par ssh avec X11 forwarding
