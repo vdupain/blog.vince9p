@@ -49,7 +49,7 @@ Pour installer [powerline.bash](https://gitlab.com/bersace/powerline.bash):
 ```sh
 curl -Lo ~/.config/powerline.bash https://gitlab.com/bersace/powerline-bash/raw/master/powerline.bash
 . ~/.config/powerline.bash
-PROMPT_COMMAND='__update_ps1 $?
+PROMPT_COMMAND='__update_ps1 $?'
 ```
 
 Ensuite il faut ajouter la configuration suivante dans votre fichier _.bashrc_ pour activer **powerline.bash**:
