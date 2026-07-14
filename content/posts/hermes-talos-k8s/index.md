@@ -4,7 +4,7 @@ tags = ["homelab", "k8s", "terraform", "hermes", "talos"]
 date = "2026-07-14"
 +++
 
-![k8s-cluster](images/k8s-cluster.png)
+![hermes-chat](images/hermes-chat.png)
 
 Tu as un homelab Proxmox, tu as entendu parler de Talos Linux et de Cilium, tu as même développé ton propre module Terraform pour automatiser tout ça. Mais entre le moment où tu te dis *"je vais créer un petit cluster K8s"* et le moment où tu as un cluster fonctionnel avec `kubectl get nodes`, il y a tout un chemin de commandes à taper, de fichiers à éditer, de tokens à générer.
 
