@@ -5,21 +5,19 @@ date = "2025-01-01"
 
 Vincent Dupain
 
-Ingénieur informatique diplômé de l’UTC
+Lead Engineer DevOps
 
-25 ans d’expérience dans différents domaines et organisations
+Ingénieur informatique diplômé de l'UTC (Bac+5, Niveau 7), 25 ans d'expérience. Expert en DevOps, Platform Engineering, SRE et architecture logicielle. Spécialiste de l'industrialisation : usine logicielle, CI/CD, Infrastructure as Code (IaC), GitOps et observabilité. Maîtrise de l'écosystème Kubernetes et du cloud souverain SecNumCloud. Profil pragmatique, facilitateur inter-équipes, orienté qualité et fiabilité.
 
-Expert en DevOps, Platform Engineering (ex Usine logicielle) et architecture polyvalent, pragmatique, facilitateur
-
-06 08 04 81 53 | vincent.dupain at protonmail.com
+[linkedin.com/in/vdupain](https://linkedin.com/in/vdupain)
 
 ## Expérience professionnelle
 
-### DevOps & Delivery Manager - OODRIVE - depuis Janvier 2022
+### Lead Engineer DevOps - OODRIVE - depuis Janvier 2022
 
-Responsable de la Delivery & Software Factory et des pratiques DevOps/SRE
+Responsable de la Software Factory et des pratiques DevOps/SRE
 
-- Management d’une équipe de 4 Devops Engineers et 1 SRE
+- Management d’une équipe de 3 DevOps Engineers et 1 SRE
   - roadmap et pilotage opérationnel
   - gestion humaine (objectifs, onboarding, career path)
 - Gestion de l’environnement de Staging
@@ -30,8 +28,11 @@ Responsable de la Delivery & Software Factory et des pratiques DevOps/SRE
 - Mise en place de l’observabilité en Staging/PréProd/Prod
   - migration vers OpenSearch et Vector
   - stack Prometheus/Thanos/Grafana pour les métriques à long terme
-  - mise en œuvre des tableaux de bords
+  - tableaux de bord SLO et métriques CI
+  - instrumentation OpenTelemetry
+  - observabilité avec l’APM Grafana, en dual write avec une stack self hosted
   - mise en œuvre du socle technique d’alerte avec AlertManager
+  - FinOps sur les métriques : ~1,25 M → ~610 k séries (−51 %), sans perte d’observabilité critique
   - déploiement sur Kubernetes en GitOps avec FluxCD
 - Mise en place du SDLC
   - référence documentaire sur les 6 phases
@@ -52,7 +53,7 @@ Responsable de la Delivery & Software Factory et des pratiques DevOps/SRE
   - architecture
   - déploiement du rôle SRE: missions, roadmap et suivi opérationnel
 
-**Technologies**: Kubernetes, Harbor, Talos, Helm, FluxCD, IaC, Terraform, Ansible, Proxmox, Gitlab, Prometheus, Go, Python, Java, Grafana, Thanos, spring-boot, Postgresql, Reddis, Kafka, Mongodb, RabbitMQ, Atlassian, Kanban, SecNumCloud
+**Technologies**: Kubernetes, Harbor, Talos, Helm, FluxCD, IaC, Terraform, OpenTofu, Ansible, Proxmox, Gitlab, Prometheus, Go, Python, Java, Grafana, Thanos, AlertManager, OpenTelemetry, OpenSearch, Vector, spring-boot, Postgresql, Redis, Kafka, Mongodb, RabbitMQ, Atlassian, Kanban, SecNumCloud
 
 ### Architecte Solution - GFT GROUP - Juillet 2021 à Décembre 2021
 
@@ -189,6 +190,8 @@ Sybase, SQLServer
   - délivré par l’ANFR (Agence nationale des fréquences)
   - Indicatif **F4JVR**
 
+- Formation Scrum Master - Xebia - 2008
+
 - Contribution sur 2 brevets (cf. expérience chez Streamezzo)
   - Method for supplying a multimedia content proxy, proxy, and corresponding computer software product
   - Method for creating content, method for tracking content use actions, and corresponding terminal and signals
@@ -196,10 +199,12 @@ Sybase, SQLServer
 ## Compétences
 
 - **Usine logicielle**: Gitlab, Git, Jenkins, Nexus, Sonar, Dependency Track
-- **Observabilité**: Prometheus, Grafana, AlertManager, Thanos, ElasticSearch, Logstash, filebeat, Kibana, OpenSearch, Vector
-- **Automatisation de l’infrastructure**: Terraform, Ansible, Helm
-- **Conteneurisation**: Docker, Kubernetes
+- **Observabilité**: Prometheus, Grafana, AlertManager, Thanos, OpenTelemetry, ElasticSearch, Logstash, filebeat, Kibana, OpenSearch, Vector
+- **Automatisation de l’infrastructure**: Terraform, OpenTofu, Ansible, Helm
+- **Conteneurisation**: Docker, Kubernetes, Talos, Harbor
 - **CI/CD**: Gitlab CI, Jenkins, FluxCD, GitHub Actions
+- **API Management**: Axway API Manager / API Gateway
 - **Langages**: Java, Python, Go, Shell
 - **Middlewares**: PostgreSQL, MariaDB, Kafka, RabbitMQ, Redis, MongoDB
+- **Méthodes & gouvernance**: Scrum, Kanban, SDLC, SecNumCloud, SLO, GitOps, TDD
 - **Outils collaboratifs**: Atlassian Jira/Confluence, Figma
