@@ -2123,6 +2123,7 @@ Tableau unifié des pièges, classés par catégorie (équipement ou sujet) :
 | 36 | ALIX | `dhclient` absent | Pas d'IP DHCP | Fichier `/etc/hostname.vlanXX` + netstart |
 | 37 | ALIX | IPs "gateway" dans `netstat -rn` = IP locales | Confusion | Normal, routes connectées |
 | 38 | WiFi | ath10k strippe les tags VLAN même en WDS (4-adresses) | 0 paquet 802.1Q | Encapsuler : VXLAN ou SSIDs dédiés |
+| 39 | OPNsense | Upgrade OPNsense a cassé les VXLAN | VLANs 20-50 morts derrière le répéteur (pas de DHCP, ARP incomplete), VLAN 10 OK | Réactiver : Interfaces → Devices → VXLAN → recréer le device + Apply |
 
 ### Diagnostic et troubleshooting
 
